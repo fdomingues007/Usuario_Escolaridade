@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20201118231654_v1")]
+    [Migration("20201119182703_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entities.Escolaridade", b =>
                 {
-                    b.Property<int>("CodEscolaridade")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("CodEscolaridade");
 
                     b.Property<string>("Nivel");
 

@@ -15,6 +15,7 @@ namespace Infra.Map
       builder.HasKey(x => x.IdUsuario);
       builder.Property(x => x.Nome);
       builder.Property(x => x.SobreNome);
+      //builder.Property(x => x.DtNascimento);cris
 
       builder
         .HasOne(x => x.Escolaridade)

@@ -22,9 +22,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entities.Escolaridade", b =>
                 {
-                    b.Property<int>("CodEscolaridade")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("CodEscolaridade");
 
                     b.Property<string>("Nivel");
 

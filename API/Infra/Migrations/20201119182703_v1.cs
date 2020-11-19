@@ -16,8 +16,7 @@ namespace Infra.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    CodEscolaridade = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CodEscolaridade = table.Column<int>(nullable: false),
                     Nivel = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
