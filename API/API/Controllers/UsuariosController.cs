@@ -74,18 +74,25 @@ namespace API.Controllers
     {
       try
       {
-        //Usuarios usuarios = new Usuarios();
-        //var retornoef = await _usuarioRepository.GetAll();
-        //return new ResultViewModel(false, "Consulta realizada com sucesso! ", retornoef);
-        List<UsuarioListaView> usuariolistaview = new List<UsuarioListaView>();
+        var response = await _usuarioRepository.GetUsuarioEscolaridade();
+        return new ResultViewModel(false, "", response);
+      }
+      catch (Exception ex)
+      {
+        return new ResultViewModel(true, "Erro ao listar o usuário!", ex.Message);
+      }
 
-        //using (var contexto = new EfContext())
-        //{
-        //  var listaUsuario = contexto.Usuarios.Include(x => x.Escolaridade).AsNoTracking().ToList();
-        //  return new ResultViewModel(false, "Consulta realizada com sucesso! ", listaUsuario);
-        //}
-        return null;
+    }
 
+
+    [HttpGet]
+    [Route("v1/getUsuarioId/{id}")]
+    public async Task<ResultViewModel> GetUsuarioId(int id)
+    {
+      try
+      {
+        var response = await _usuarioRepository.GetId(id);
+        return new ResultViewModel(false, "", response);
       }
       catch (Exception ex)
       {
