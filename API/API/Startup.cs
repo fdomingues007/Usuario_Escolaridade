@@ -83,6 +83,9 @@ namespace API
       services.AddDbContext<EfContext>(options =>
           options.UseSqlServer(Configuration.GetSection("ConnectionStrings:EFContext").Value));
 
+      var optionsBuilder = new DbContextOptionsBuilder<EfContext>();
+      optionsBuilder.UseSqlServer(Configuration.GetSection("ConnectionStrings:EFContext").Value);
+
       var tokenConfiguration = new TokenJwtOptions
       {
         Audience = AUDIENCE,

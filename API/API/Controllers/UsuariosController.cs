@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace API.Controllers
 {
@@ -80,8 +81,8 @@ namespace API.Controllers
 
         //using (var contexto = new EfContext())
         //{
-        //    var listaUsuario = contexto.Usuarios.Include(x => x.Escolaridade).AsNoTracking().ToList();
-        //    return new ResultViewModel(false, "Consulta realizada com sucesso! ", listaUsuario);
+        //  var listaUsuario = contexto.Usuarios.Include(x => x.Escolaridade).AsNoTracking().ToList();
+        //  return new ResultViewModel(false, "Consulta realizada com sucesso! ", listaUsuario);
         //}
         return null;
 
