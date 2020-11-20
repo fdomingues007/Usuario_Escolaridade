@@ -49,6 +49,18 @@ namespace Infra.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "Escolaridade",
+                columns: new[] { "CodEscolaridade", "Nivel" },
+                values: new object[,]
+                {
+                    { 1, "Infantil" },
+                    { 2, "Fundamental" },
+                    { 3, "Médio" },
+                    { 4, "Superior" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_CodEscolaridade",
                 schema: "dbo",

@@ -29,6 +29,13 @@ namespace Infra.Migrations
                     b.HasKey("CodEscolaridade");
 
                     b.ToTable("Escolaridade");
+
+                    b.HasData(
+                        new { CodEscolaridade = 1, Nivel = "Infantil" },
+                        new { CodEscolaridade = 2, Nivel = "Fundamental" },
+                        new { CodEscolaridade = 3, Nivel = "Médio" },
+                        new { CodEscolaridade = 4, Nivel = "Superior" }
+                    );
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuarios", b =>

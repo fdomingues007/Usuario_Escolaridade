@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20201119191229_v1")]
+    [Migration("20201120001423_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,13 @@ namespace Infra.Migrations
                     b.HasKey("CodEscolaridade");
 
                     b.ToTable("Escolaridade");
+
+                    b.HasData(
+                        new { CodEscolaridade = 1, Nivel = "Infantil" },
+                        new { CodEscolaridade = 2, Nivel = "Fundamental" },
+                        new { CodEscolaridade = 3, Nivel = "Médio" },
+                        new { CodEscolaridade = 4, Nivel = "Superior" }
+                    );
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuarios", b =>
