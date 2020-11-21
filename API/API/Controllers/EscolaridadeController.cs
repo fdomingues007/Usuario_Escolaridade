@@ -29,11 +29,11 @@ namespace API.Controllers
       try
       {
         var response = await _escolaridadeRepository.GetAll();
-        return new ResultViewModel(false, "", response);
+        return new ResultViewModel(false, false, "", response);
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro ao listar o usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro ao listar o usuário!", ex.Message);
       }
 
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20201120001423_v1")]
+    [Migration("20201121141249_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,8 @@ namespace Infra.Migrations
                 {
                     b.Property<int>("CodEscolaridade");
 
-                    b.Property<string>("Nivel");
+                    b.Property<string>("Nivel")
+                        .HasMaxLength(50);
 
                     b.HasKey("CodEscolaridade");
 
@@ -50,15 +51,22 @@ namespace Infra.Migrations
 
                     b.Property<DateTime?>("DtNascimento");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasMaxLength(200);
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .HasMaxLength(90);
 
-                    b.Property<string>("SobreNome");
+                    b.Property<string>("SobreNome")
+                        .HasMaxLength(200);
 
                     b.HasKey("IdUsuario");
 
                     b.HasIndex("CodEscolaridade");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Usuarios");
                 });
@@ -66,7 +74,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Domain.Entities.Usuarios", b =>
                 {
                     b.HasOne("Domain.Entities.Escolaridade", "Escolaridade")
-                        .WithMany("ListaUsuarios")
+                        .WithMany("usuarios")
                         .HasForeignKey("CodEscolaridade")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -17,7 +17,7 @@ namespace Infra.Migrations
                 columns: table => new
                 {
                     CodEscolaridade = table.Column<int>(nullable: false),
-                    Nivel = table.Column<string>(nullable: true)
+                    Nivel = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,9 +31,9 @@ namespace Infra.Migrations
                 {
                     IdUsuario = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true),
-                    SobreNome = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(maxLength: 90, nullable: true),
+                    SobreNome = table.Column<string>(maxLength: 200, nullable: true),
+                    Email = table.Column<string>(maxLength: 200, nullable: true),
                     DtNascimento = table.Column<DateTime>(nullable: true),
                     CodEscolaridade = table.Column<int>(nullable: false)
                 },
@@ -66,6 +66,14 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "Usuarios",
                 column: "CodEscolaridade");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Email",
+                schema: "dbo",
+                table: "Usuarios",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

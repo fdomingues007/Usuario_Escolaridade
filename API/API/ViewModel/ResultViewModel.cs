@@ -8,15 +8,17 @@ namespace API.ViewModel
   {
     public ResultViewModel() { }
 
-    public ResultViewModel(bool showmessage, string message, object data)
+    public ResultViewModel(bool erro, bool showmessage, string message, object data)
     {
-      this.showmessage = showmessage;
-      this.message = message;
-      this.data = data;
+      this.Erro = erro;
+      this.Showmessage = showmessage;
+      this.Message = message;
+      this.Data = data;
     }
 
-    public bool showmessage { get; set; }
-    public string message { get; set; }
-    public object data { get; set; }
+    public bool Erro { get; set; }
+    public bool Showmessage { get; set; }
+    public string Message { get; set; }
+    public object Data { get; set; }
   }
 }

@@ -36,15 +36,24 @@ namespace API.Controllers
       {
         var validacaook = request.Valida(request.Nome, request.Email, request.DtNascimento);
         if (validacaook.Codigo != 0)
-          return new ResultViewModel(true, validacaook.Descricao, validacaook);
+          return new ResultViewModel(true, true, validacaook.Descricao, validacaook);
 
-        Usuarios usuarios = new Usuarios(request.CodEscolaridade, request.Nome, request.SobreNome, request.Email, request.DtNascimento);
-        var incluir = await _usuarioRepository.AddAsync(usuarios);
-        return new ResultViewModel(true, "Inclusão do usuário realizado com sucesso! ", null);
+        var emailExiste = await _usuarioRepository.EmailExistente(request.Email, request.IdUsuario);
+
+        if (emailExiste == null)
+        {
+          Usuarios usuarios = new Usuarios(request.CodEscolaridade, request.Nome, request.SobreNome, request.Email, request.DtNascimento);
+          var incluir = await _usuarioRepository.AddAsync(usuarios);
+          return new ResultViewModel(false, true, "Inclusão do usuário realizada com sucesso! ", null);
+        }
+        else
+        {
+          return new ResultViewModel(true, true, "E-mail existente! ", null);
+        }
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro ao incluir o usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro ao incluir o usuário!", ex.Message);
       }
     }
 
@@ -56,15 +65,25 @@ namespace API.Controllers
       {
         var validacaook = request.Valida(request.Nome, request.Email, request.DtNascimento);
         if (validacaook.Codigo != 0)
-          return new ResultViewModel(true, validacaook.Descricao, validacaook);
+          return new ResultViewModel(true, true, validacaook.Descricao, validacaook);
 
-        Usuarios usuarios = new Usuarios(request.IdUsuario, request.CodEscolaridade, request.Nome, request.SobreNome, request.Email, request.DtNascimento);
-        var alterar = await _usuarioRepository.UpdateAsync(usuarios);
-        return new ResultViewModel(true, "Alteração do usuário realizado com sucesso! ", null);
+        var emailExiste = await _usuarioRepository.EmailExistente(request.Email, request.IdUsuario);
+
+        if (emailExiste == null)
+        {
+          Usuarios usuarios = new Usuarios(request.IdUsuario, request.CodEscolaridade, request.Nome, request.SobreNome, request.Email, request.DtNascimento);
+          var alterar = await _usuarioRepository.UpdateAsync(usuarios);
+          return new ResultViewModel(false, true, "Alteração do usuário realizada com sucesso! ", null);
+        }
+        else
+        {
+          return new ResultViewModel(true, true, "E-mail existente! ", null);
+        }
+      
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro a alteração do usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro a alteração do usuário!", ex.Message);
       }
     }
 
@@ -75,15 +94,14 @@ namespace API.Controllers
       try
       {
         var response = await _usuarioRepository.GetUsuarioEscolaridade();
-        return new ResultViewModel(false, "", response);
+        return new ResultViewModel(false, false, "", response);
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro ao listar o usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro ao listar o usuário!", ex.Message);
       }
 
     }
-
 
     [HttpGet]
     [Route("v1/getUsuarioId/{id}")]
@@ -92,30 +110,30 @@ namespace API.Controllers
       try
       {
         var response = await _usuarioRepository.GetId(id);
-        return new ResultViewModel(false, "", response);
+        return new ResultViewModel(false, false, "", response);
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro ao listar o usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro ao listar o usuário!", ex.Message);
       }
 
     }
 
     [HttpDelete]
-    [Route("v1/delete")]
-    public async Task<ResultViewModel> Delete([FromBody] Usuarios request)
+    [Route("v1/delete/{id}")]
+    public async Task<ResultViewModel> Delete(int id)
     {
       try
       {
         Usuarios usuarios = new Usuarios();
-        usuarios.IdUsuario = request.IdUsuario;
+        usuarios.IdUsuario = id;
         await _usuarioRepository.DeleteAsync(usuarios);
-        return new ResultViewModel(true, "Exclusão do usuário realizado com sucesso! ", null);
+        return new ResultViewModel(false, true, "Exclusão do usuário realizada com sucesso! ", null);
 
       }
       catch (Exception ex)
       {
-        return new ResultViewModel(true, "Erro ao excluir o usuário!", ex.Message);
+        return new ResultViewModel(true, true, "Erro ao excluir o usuário!", ex.Message);
       }
     }
 

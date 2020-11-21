@@ -9,5 +9,6 @@ namespace Domain.Interface
   public interface IUsuarioRepository : IRepositoryBase<Usuarios>
   {
     Task<IEnumerable<Usuarios>> GetUsuarioEscolaridade();
+    Task<Usuarios> EmailExistente(string email, int idUsuario);
   }
 }

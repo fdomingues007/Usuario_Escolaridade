@@ -23,6 +23,12 @@
     <Compile Remove="Migrations\20201119182703_v1.Designer.cs" />
     <Compile Remove="Migrations\20201119191229_v1.cs" />
     <Compile Remove="Migrations\20201119191229_v1.Designer.cs" />
+    <Compile Remove="Migrations\20201120001423_v1.cs" />
+    <Compile Remove="Migrations\20201120001423_v1.Designer.cs" />
+    <Compile Remove="Migrations\20201120134140_v1.cs" />
+    <Compile Remove="Migrations\20201120134140_v1.Designer.cs" />
+    <Compile Remove="Migrations\20201120174328_v1.cs" />
+    <Compile Remove="Migrations\20201120174328_v1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,10 +42,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
